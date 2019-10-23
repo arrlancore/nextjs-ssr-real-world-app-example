@@ -11,11 +11,11 @@ const getQuery = (router, key) => router.query[key]
 const ViewPostPage = ({ initData, router }) => {
   const slug = getQuery(router, 'slug')
   const requestConfig = { method: 'get', secure: 'optional', path: `/articles/${slug}` }
-  const [dataArticle] = useApi(initData && initData.data ? null : requestConfig, initData)
+  const apiArticle = useApi(initData && initData.data ? null : requestConfig, initData)
 
   return (
     <Layout>
-      <ViewPost dataArticle={dataArticle} />
+      <ViewPost apiArticle={apiArticle} />
     </Layout>
   )
 }

@@ -23,7 +23,6 @@ class MainApp extends App {
 
   render() {
     const { Component, pageProps, cookies, router } = this.props
-    console.log('TCL: render -> this.props', this.props)
     const defaultTitle = 'Next SSR - Real World App'
     return (
       <ThemeProvider theme={theme}>

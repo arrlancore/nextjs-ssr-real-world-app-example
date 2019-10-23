@@ -1,18 +1,25 @@
 import React from 'react'
 import marked from 'marked'
 import Link from 'next/link'
-import { object } from 'prop-types'
+import { array } from 'prop-types'
 import { useApi } from '../libs/api'
 import { isMine } from '../libs/userAuth'
 import usePrev from '../libs/usePrevious'
+import Router from 'next/router'
+import { toast } from 'react-toastify'
 
-const ViewArticle = ({ dataArticle }) => {
+const ViewArticle = ({ apiArticle }) => {
+  const [dataArticle, requestDataArticle] = apiArticle
   const [data, setData] = React.useState(dataArticle.data)
   const [comment, setComment] = React.useState()
   const [favoritePost, requestFavoritePost] = useApi()
   const [followUser, requestFollowUser] = useApi()
   const [listComment, requestListComment] = useApi()
   const [singleComment, requestSingleComment] = useApi()
+
+  const handleDeleteArticle = slug => {
+    requestDataArticle({ path: `/articles/${slug}`, method: 'delete', secure: true })
+  }
 
   const favoritePostAction = (favorited, slug) => {
     if (favorited) {
@@ -58,8 +65,19 @@ const ViewArticle = ({ dataArticle }) => {
   React.useEffect(() => {
     // passing props to local state
     // so we modify it on the future
-    if (dataArticle.data && dataArticle.data !== prevDataArticle) {
+    if (dataArticle.data && dataArticle.data.article && dataArticle.data !== prevDataArticle) {
       setData(dataArticle.data)
+    }
+    if (dataArticle.data && !dataArticle.data.article && prevDataArticle && prevDataArticle.article) {
+      toast.info('Post has been deleted', {
+        autoClose: 2000,
+        onClose: () => {
+          Router.push(
+            `/user-profile?username=${prevDataArticle.article.author.username}`,
+            `/user-profile/${prevDataArticle.article.author.username}`
+          )
+        }
+      })
     }
     // after favo/unfavo post update the data article
     if (favoritePost.data && prevFavoritePostData !== favoritePost.data) {
@@ -118,24 +136,26 @@ const ViewArticle = ({ dataArticle }) => {
               <span className="date">{new Date(createdAt).toDateString()}</span>
             </div>
             {!isMine(dataAuthor.username) ? (
-              <button
-                onClick={() => folowUserAction(dataAuthor.following, dataAuthor.username)}
-                className="btn btn-sm btn-outline-secondary"
-              >
-                <i className="ion-plus-round" />
-                &nbsp; {`${dataAuthor.following ? 'Unfollow' : 'Follow'} ${dataAuthor.username}`}{' '}
-                {/* <span className="counter">(10)</span> */}
-              </button>
+              <>
+                <button
+                  onClick={() => folowUserAction(dataAuthor.following, dataAuthor.username)}
+                  className="btn btn-sm btn-outline-secondary"
+                >
+                  <i className="ion-plus-round" />
+                  &nbsp; {`${dataAuthor.following ? 'Unfollow' : 'Follow'} ${dataAuthor.username}`}{' '}
+                  {/* <span className="counter">(10)</span> */}
+                </button>
+                &nbsp;&nbsp;
+                <button onClick={() => favoritePostAction(favorited, slug)} className="btn btn-sm btn-outline-primary">
+                  <i className="ion-heart" />
+                  &nbsp; {`${favorited ? 'Unfavorited' : 'Favorited'}`} Post{' '}
+                  <span className="counter">({favoritesCount})</span>
+                </button>
+                &nbsp;&nbsp;
+              </>
             ) : (
               ''
             )}
-            &nbsp;&nbsp;
-            <button onClick={() => favoritePostAction(favorited, slug)} className="btn btn-sm btn-outline-primary">
-              <i className="ion-heart" />
-              &nbsp; {`${favorited ? 'Unfavorited' : 'Favorited'}`} Post{' '}
-              <span className="counter">({favoritesCount})</span>
-            </button>
-            &nbsp;&nbsp;
             {isMine(dataAuthor.username) ? (
               <>
                 <Link href={`/update-post?slug=${slug}`} as={`/update-post/edit/${slug}`}>
@@ -144,7 +164,7 @@ const ViewArticle = ({ dataArticle }) => {
                   </a>
                 </Link>
                 &nbsp;&nbsp;
-                <button className="btn btn-outline-danger btn-sm">
+                <button onClick={() => handleDeleteArticle(slug)} className="btn btn-outline-danger btn-sm">
                   <i className="ion-trash-a"></i> Delete Article
                 </button>
               </>
@@ -178,20 +198,26 @@ const ViewArticle = ({ dataArticle }) => {
               </Link>
               <span className="date">{new Date(createdAt).toDateString()}</span>
             </div>
-            <button
-              onClick={() => folowUserAction(dataAuthor.following, dataAuthor.username)}
-              className="btn btn-sm btn-outline-secondary"
-            >
-              <i className="ion-plus-round" />
-              &nbsp; {`${dataAuthor.following ? 'Unfollow' : 'Follow'} ${dataAuthor.username}`}{' '}
-              {/* <span className="counter">(10)</span> */}
-            </button>
-            &nbsp;
-            <button onClick={() => favoritePostAction(favorited, slug)} className="btn btn-sm btn-outline-primary">
-              <i className="ion-heart" />
-              &nbsp; {`${favorited ? 'Unfavorited' : 'Favorited'}`} Post{' '}
-              <span className="counter">({favoritesCount})</span>
-            </button>
+            {!isMine(dataAuthor.username) ? (
+              <>
+                <button
+                  onClick={() => folowUserAction(dataAuthor.following, dataAuthor.username)}
+                  className="btn btn-sm btn-outline-secondary"
+                >
+                  <i className="ion-plus-round" />
+                  &nbsp; {`${dataAuthor.following ? 'Unfollow' : 'Follow'} ${dataAuthor.username}`}{' '}
+                  {/* <span className="counter">(10)</span> */}
+                </button>
+                &nbsp;
+                <button onClick={() => favoritePostAction(favorited, slug)} className="btn btn-sm btn-outline-primary">
+                  <i className="ion-heart" />
+                  &nbsp; {`${favorited ? 'Unfavorited' : 'Favorited'}`} Post{' '}
+                  <span className="counter">({favoritesCount})</span>
+                </button>
+              </>
+            ) : (
+              ''
+            )}
           </div>
         </div>
 
@@ -258,5 +284,5 @@ const ViewArticle = ({ dataArticle }) => {
     </div>
   )
 }
-ViewArticle.propTypes = { dataArticle: object }
+ViewArticle.propTypes = { apiArticle: array }
 export default ViewArticle
