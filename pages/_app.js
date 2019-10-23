@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { withRouter } from 'next/router'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import styledNormalize from 'styled-normalize'
-import { AuthProvider, useAuth } from '../src/libs/context'
+import { AuthProvider } from '../src/libs/context'
 import { theme } from '../src/config'
 
 const NormalizeStyle = createGlobalStyle`
@@ -15,7 +15,7 @@ class MainApp extends App {
     const cookies = ctx && ctx.req ? ctx.req.headers.cookie : ''
     return {
       cookies,
-      pageProps: Component.getInitialProps ? await Component.getInitialProps({ ...ctx, reactContext: { useAuth } }) : {}
+      pageProps: Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
     }
   }
 
