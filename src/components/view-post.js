@@ -108,7 +108,7 @@ const ViewArticle = ({ dataArticle }) => {
           <div className="article-meta">
             <Link as={`/user-profile/${dataAuthor.username}`} href={`/user-profile?username=${dataAuthor.username}`}>
               <a>
-                <img src={dataAuthor.image} />
+                <img src={dataAuthor.image} alt="author-image" />
               </a>
             </Link>
             <div className="info">
@@ -169,7 +169,7 @@ const ViewArticle = ({ dataArticle }) => {
           <div className="article-meta">
             <Link as={`/user-profile/${dataAuthor.username}`} href={`/user-profile?username=${dataAuthor.username}`}>
               <a>
-                <img src={dataAuthor.image} />
+                <img src={dataAuthor.image} alt="author-image" />
               </a>
             </Link>
             <div className="info">
@@ -208,7 +208,7 @@ const ViewArticle = ({ dataArticle }) => {
                 />
               </div>
               <div className="card-footer">
-                <img src={dataAuthor.image} className="comment-author-img" />
+                <img src={dataAuthor.image} alt="author-image" className="comment-author-img" />
                 <button
                   onClick={e => commentActions.add(slug, comment, e)}
                   disabled={!comment}
@@ -230,7 +230,7 @@ const ViewArticle = ({ dataArticle }) => {
                     href={`/user-profile?username=${commentObj.author.username}`}
                   >
                     <a className="comment-author">
-                      <img src={commentObj.author.image} className="comment-author-img" />
+                      <img src={commentObj.author.image} alt="author-image" className="comment-author-img" />
                     </a>
                   </Link>
                   &nbsp;

@@ -33,7 +33,7 @@ const ListArticle = ({ data, loading, onRequestReload, pagination }) => {
               href={`/user-profile?username=${article.author.username}`}
             >
               <a>
-                <img src={article.author.image} />
+                <img src={article.author.image} alt="author-image" />
               </a>
             </Link>
             <div className="info">

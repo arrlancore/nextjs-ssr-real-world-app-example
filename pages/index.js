@@ -7,6 +7,7 @@ import { object } from 'prop-types'
 import { getTokenFromCookie } from '../src/libs/userAuth'
 import { useAuth } from '../src/libs/context'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
+import Head from '../src/components/head'
 
 const HomePage = ({ initData }) => {
   const [user] = useAuth()
@@ -30,6 +31,7 @@ const HomePage = ({ initData }) => {
   // As react documentation try use component composition to send props to child component
   return (
     <Layout>
+      <Head title="Wellcome to conduit" />
       <Home banner={banner} dataArticle={[listArticle, setRequestArticle]} dataTag={listTags} />
     </Layout>
   )

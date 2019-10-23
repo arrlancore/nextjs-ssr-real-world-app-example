@@ -113,7 +113,7 @@ const Profile = ({ userApi, username }) => {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <img src={image} className="user-img" />
+              <img src={image} alt="user-image" className="user-img" />
               <h4>{username}</h4>
               <p>{bio}</p>
               {isMine(username) ? (
