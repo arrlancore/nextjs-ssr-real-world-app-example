@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { siteConfig } from '../config'
 
-function MetaHeader({ description, lang, meta, title, image }) {
+function SeoConfig({ description, lang, meta, title, image }) {
   const metaDescription = description || siteConfig.siteDescription
   const metaTitle = title || siteConfig.siteTitle
   const metaImage = image || siteConfig.siteLogo
@@ -57,13 +57,13 @@ function MetaHeader({ description, lang, meta, title, image }) {
   )
 }
 
-MetaHeader.defaultProps = {
+SeoConfig.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``
 }
 
-MetaHeader.propTypes = {
+SeoConfig.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
@@ -71,4 +71,4 @@ MetaHeader.propTypes = {
   image: PropTypes.string
 }
 
-export default MetaHeader
+export default SeoConfig

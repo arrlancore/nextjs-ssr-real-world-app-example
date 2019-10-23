@@ -15,9 +15,10 @@ import { handleErrorInitialProps } from '../src/libs/errorHandler'
 import { object } from 'prop-types'
 import usePrevious from '../src/libs/usePrevious'
 import { getTokenFromCookie } from '../src/libs/userAuth'
+import SeoConfig from '../src/components/seoConfig'
 const UserProfilePage = props => {
   const { username } = props.router.query
-  const requestConfig = props.initData.data ? null : { path: `/profiles/${username}`, secure: true }
+  const requestConfig = props.initData.data ? null : { path: `/profiles/${username}`, secure: 'optional' }
   const [userProfileData, requestUser] = useApi(requestConfig, props.initData)
   const prevUsername = usePrevious(username)
   React.useEffect(() => {
@@ -27,7 +28,7 @@ const UserProfilePage = props => {
   }, [prevUsername, props.initData.isServer, requestUser, username])
   return (
     <Layout>
-      {' '}
+      <SeoConfig title={`Profile: ${username}`} />
       <Profile username={username} userApi={[userProfileData, requestUser]} />
     </Layout>
   )
@@ -38,7 +39,7 @@ UserProfilePage.getInitialProps = async ({ req, res, isServer }) => {
   try {
     if (isServer) {
       const cookies = (req && req.headers && req.headers.cookie) || ''
-      const token = getTokenFromCookie(cookies) || true
+      const token = getTokenFromCookie(cookies) || 'optional'
       const { username } = req.params
       const requestConfigUser = {
         path: `/profiles/${username}`,

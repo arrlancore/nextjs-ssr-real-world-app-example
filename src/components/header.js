@@ -2,15 +2,58 @@ import React from 'react'
 import Link from 'next/link'
 import { useAuth } from '../libs/context'
 import { handleLogout } from '../libs/userAuth'
-const Header = () => {
+import { withRouter } from 'next/router'
+import { object } from 'prop-types'
+
+const Header = ({ router }) => {
   const [authData, setAuth] = useAuth()
-  const isLogin = authData ? authData.isLogin : false
+  const userIsLogin = authData ? authData.isLogin : false
+  const activePath = (router && router.asPath) || '/'
   const { username } = authData || {}
 
   const logout = () => {
     setAuth({})
     handleLogout()
   }
+
+  const userProfile = {
+    href: `/user-profile?username=${username}`,
+    as: `/user-profile/${username}`
+  }
+
+  const menus = [
+    {
+      title: 'Home',
+      href: '/',
+      isLogin: null
+    },
+    {
+      title: 'New Post',
+      href: '/update-post',
+      isLogin: true
+    },
+    {
+      title: 'Setting',
+      href: '/setting',
+      isLogin: true
+    },
+    {
+      title: 'Login',
+      href: '/login',
+      isLogin: false
+    },
+    {
+      title: 'Sign Up',
+      href: '/sign-up',
+      isLogin: false
+    },
+    {
+      title: username,
+      href: userProfile.href,
+      as: userProfile.as,
+      isLogin: true
+    }
+  ]
 
   return (
     <nav className="navbar navbar-light">
@@ -19,66 +62,41 @@ const Header = () => {
           conduit
         </a>
         <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item">
-            <Link href="/">
-              <a className="nav-link active">Home</a>
-            </Link>
-          </li>
-          {isLogin ? (
-            <>
-              <li className="nav-item">
-                <Link href="/update-post">
-                  <a className="nav-link">
-                    <i className="ion-compose" />
-                    &nbsp;New Post
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/setting">
-                  <a className="nav-link">
-                    <i className="ion-gear-a" />
-                    &nbsp;Settings
-                  </a>
-                </Link>
-              </li>
-            </>
+          {menus.map(({ title, isLogin, ...rest }, idx) => (
+            <React.Fragment key={idx}>
+              {isLogin === !!userIsLogin || isLogin === null ? (
+                <li className="nav-item">
+                  <Link {...rest}>
+                    <a
+                      style={{ textTransform: 'capitalize' }}
+                      className={`nav-link ${activePath === rest.as || activePath === rest.href ? 'active' : ''}`}
+                    >
+                      {title}
+                    </a>
+                  </Link>
+                </li>
+              ) : (
+                ''
+              )}
+            </React.Fragment>
+          ))}
+
+          {userIsLogin ? (
+            <li onClick={logout} className="nav-item">
+              <a style={{ cursor: 'pointer' }} className="nav-link">
+                Logout
+              </a>
+            </li>
           ) : (
             ''
-          )}
-          {!isLogin ? (
-            <>
-              <li className="nav-item">
-                <Link href="/login">
-                  <a className="nav-link">Login</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/sign-up">
-                  <a className="nav-link">Sign up</a>
-                </Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link href={`/user-profile?username=${username}`} as={`/user-profile/${username}`}>
-                  <a style={{ textTransform: 'capitalize' }} className="nav-link">
-                    {username}
-                  </a>
-                </Link>
-              </li>
-              <li onClick={logout} className="nav-item">
-                <a style={{ cursor: 'pointer' }} className="nav-link">
-                  Logout
-                </a>
-              </li>
-            </>
           )}
         </ul>
       </div>
     </nav>
   )
 }
+Header.propTypes = {
+  router: object
+}
 
-export default Header
+export default withRouter(Header)

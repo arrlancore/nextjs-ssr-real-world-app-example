@@ -5,6 +5,7 @@ import { useApi, callApi } from '../src/libs/api'
 import { object } from 'prop-types'
 import { getTokenFromCookie } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
+import SeoConfig from '../src/components/seoConfig'
 
 const getQuery = (router, key) => router.query[key]
 
@@ -12,9 +13,11 @@ const ViewPostPage = ({ initData, router }) => {
   const slug = getQuery(router, 'slug')
   const requestConfig = { method: 'get', secure: 'optional', path: `/articles/${slug}` }
   const apiArticle = useApi(initData && initData.data ? null : requestConfig, initData)
-
+  const [articleResult] = apiArticle
+  const article = articleResult.data ? articleResult.data.article : {}
   return (
     <Layout>
+      <SeoConfig title={article.title || ''} description={article.description} />
       <ViewPost apiArticle={apiArticle} />
     </Layout>
   )

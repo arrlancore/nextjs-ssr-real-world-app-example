@@ -117,7 +117,7 @@ export const useApi = (initialRequestConfig, initialData = {}) => {
 export const callApi = async requestConfigInit => {
   const { method, path, pathOption, params, data, secure } = requestConfigInit
   let headers = {}
-  if (secure) {
+  if (secure && secure !== 'optional') {
     headers = {
       Authorization: `Token ${secure}`
     }

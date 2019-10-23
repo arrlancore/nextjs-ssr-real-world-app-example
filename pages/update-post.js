@@ -5,6 +5,7 @@ import { getTokenFromCookie } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
 import { callApi, useApi } from '../src/libs/api'
 import { object } from 'prop-types'
+import SeoConfig from '../src/components/seoConfig'
 
 const UpdatePostPage = props => {
   const { slug } = props.router.query
@@ -12,7 +13,7 @@ const UpdatePostPage = props => {
   const [articleData, requestArticleData] = useApi(requestConfig, props.initData)
   return (
     <Layout>
-      {' '}
+      <SeoConfig title="Editor" />
       <UpdatePost articleApi={[articleData, requestArticleData]} />
     </Layout>
   )

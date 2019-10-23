@@ -5,6 +5,7 @@ import { useApi, callApi } from '../src/libs/api'
 import { getTokenFromCookie } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
 import { object } from 'prop-types'
+import SeoConfig from '../src/components/seoConfig'
 
 /**
  * @todo
@@ -16,7 +17,7 @@ const SettingPage = props => {
   const [userProfileData, requestUser] = useApi(requestConfig, props.initData)
   return (
     <Layout>
-      {' '}
+      <SeoConfig title="Setting" />
       <Setting userApi={[userProfileData, requestUser]} />
     </Layout>
   )
