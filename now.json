@@ -1,0 +1,10 @@
+{
+  "name": "next-ssr-real-world-app",
+  "public": true,
+  "version": 2,
+  "builds": [{
+    "src": "next.config.js",
+    "use": "@now/next"
+  }],
+  "alias": "next-ssr-real-world-app.now.sh"
+}

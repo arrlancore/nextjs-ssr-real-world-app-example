@@ -1,0 +1,83 @@
+{
+  "name": "next-ssr-real-world-app",
+  "version": "0.1.0",
+  "main": "server/index.js",
+  "repository": "https://github.com/arrlancore/next-ssr-real-world",
+  "bugs": "https://github.com/arrlancore/next-ssr-real-world/issues",
+  "author": "arrlancore",
+  "license": "MIT",
+  "description": "Next.Js SSR",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "compression": "^1.7.1",
+    "express": "^4.16.2",
+    "helmet": "^3.20.0",
+    "js-cookie": "^2.2.1",
+    "marked": "^0.7.0",
+    "next": "^9.1.1",
+    "next-routes": "^1.4.2",
+    "prop-types": "^15.6.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-helmet": "^5.2.0",
+    "react-toastify": "^5.4.0",
+    "styled-components": "^4.4.0",
+    "styled-normalize": "^8.0.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^9.1.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.0.0",
+    "babel-plugin-inline-dotenv": "^1.1.2",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-wrap-in-js": "^1.1.1",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
+    "jest": "^24.7.1",
+    "lint-staged": "^9.0.0",
+    "nodemon": "^1.12.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "webpack-bundle-analyzer": "^3.3.2"
+  },
+  "scripts": {
+    "lint-staged": "lint-staged",
+    "build": "cross-env NODE_ENV=production next build",
+    "start": "nodemon -w server server/index.js",
+    "serve": "cross-env NODE_ENV=production node server/index.js",
+    "clean": "rimraf node_modules/.cache .next",
+    "lint": "eslint .",
+    "now-start": "yarn serve",
+    "lint:fix": "eslint --fix .",
+    "test:ci": "jest --maxWorkers=2 --ci",
+    "test": "jest --watch"
+  },
+  "jest": {
+    "modulePaths": [
+      "./src",
+      "./src/test"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect",
+      "@testing-library/react/cleanup-after-each"
+    ]
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": [
+      "yarn lint:fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">= 10.0.1"
+  }
+}
