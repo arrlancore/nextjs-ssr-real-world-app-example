@@ -13,14 +13,17 @@ const NormalizeStyle = createGlobalStyle`
 class MainApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const cookies = ctx && ctx.req ? ctx.req.headers.cookie : ''
+    const isServer = !process.browser
+    const componentInitProps = await Component.getInitialProps({ ...ctx, isServer })
     return {
       cookies,
-      pageProps: Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
+      pageProps: Component.getInitialProps ? componentInitProps : {}
     }
   }
 
   render() {
     const { Component, pageProps, cookies, router } = this.props
+    console.log('TCL: render -> this.props', this.props)
     const defaultTitle = 'Next SSR - Real World App'
     return (
       <ThemeProvider theme={theme}>
