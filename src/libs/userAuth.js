@@ -40,3 +40,12 @@ export const getTokenFromCookie = cookies => {
   }
   return token
 }
+
+export const protectPage = (req, res) => {
+  const cookies = (req && req.headers && req.headers.cookie) || ''
+  const token = getTokenFromCookie(cookies)
+  if (!token) {
+    res.writeHead(301, { Location: '/login' })
+    res.end()
+  }
+}

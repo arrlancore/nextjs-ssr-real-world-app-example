@@ -10,7 +10,12 @@ export const handleErrorInitialProps = (res, error) => {
   if (status === 401) {
     process.browser && localStorage.removeItem(`${projectName}_user`)
     Cookies.remove(cookiesUserToken)
-    process.browser ? Router.push('/login') : res && res.writeHead(301, { Location: '/login' })
+    if (process.browser) {
+      Router.push('/login')
+    } else if (res) {
+      res.writeHead(301, { Location: '/login' })
+      res.end()
+    }
   }
   return { initData: {} }
 }

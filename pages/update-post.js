@@ -1,7 +1,7 @@
 import React from 'react'
 import UpdatePost from '../src/components/update-post'
 import Layout from '../src/components/Layout'
-import { getTokenFromCookie } from '../src/libs/userAuth'
+import { getTokenFromCookie, protectPage } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
 import { callApi, useApi } from '../src/libs/api'
 import { object } from 'prop-types'
@@ -12,7 +12,7 @@ const UpdatePostPage = props => {
   const requestConfig = !props.initData.data && slug ? { path: `/articles/${slug}`, secure: true } : null
   const [articleData, requestArticleData] = useApi(requestConfig, props.initData)
   return (
-    <Layout>
+    <Layout protected>
       <SeoConfig title="Editor" />
       <UpdatePost articleApi={[articleData, requestArticleData]} />
     </Layout>
@@ -23,6 +23,7 @@ UpdatePostPage.getInitialProps = async ({ req, res, isServer }) => {
   let initData = {}
   try {
     if (isServer) {
+      protectPage(req, res) // this page need authentication
       const cookies = (req && req.headers && req.headers.cookie) || ''
       const token = getTokenFromCookie(cookies) || true
       const { slug } = req.params
