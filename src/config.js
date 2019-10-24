@@ -21,7 +21,7 @@ export const siteConfig = {
   siteTitle: 'Conduit', // Navigation and Site Title
   siteUrl: process.env.ROOT_URL || 'https://next.org', // Domain of your site. No trailing slash!
   siteLanguage: 'en', // Language Tag on <html> element
-  siteLogo: 'images/logo.png', // Used for SEO and manifest, path to your image you placed in the 'static' folder
+  siteLogo: '/logo.png', // Used for SEO and manifest, path to your image you placed in the 'static' folder
   siteDescription: 'Real world example of nextjs SSR',
   author: 'arrlancore', // Author for schemaORGJSONLD
   organization: 'Open Source Organization',

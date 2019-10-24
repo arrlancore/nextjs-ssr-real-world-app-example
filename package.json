@@ -52,7 +52,7 @@
     "lint-staged": "lint-staged",
     "build": "cross-env NODE_ENV=production next build",
     "start": "nodemon -w server server/index.js",
-    "serve": "cross-env NODE_ENV=production node server/index.js",
+    "serve": "npm run build && cross-env NODE_ENV=production node server/index.js",
     "clean": "rimraf node_modules/.cache .next",
     "lint": "eslint .",
     "now-start": "yarn serve",
