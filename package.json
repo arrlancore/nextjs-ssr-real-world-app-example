@@ -56,6 +56,8 @@
     "clean": "rimraf node_modules/.cache .next",
     "lint": "eslint .",
     "now-start": "yarn serve",
+    "export": "next export",
+    "deploy": "npm run build && next export",
     "lint:fix": "eslint --fix .",
     "test:ci": "jest --maxWorkers=2 --ci",
     "test": "jest --watch"
