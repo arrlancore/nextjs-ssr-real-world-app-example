@@ -46,7 +46,7 @@ app.prepare().then(() => {
 
   function startServer() {
     server.listen(port, () => {
-      console.log(`> Ready on http://localhost:${port}`)
+      console.log(`Your Apps Ready on http://localhost:${port}`)
     })
   }
 })

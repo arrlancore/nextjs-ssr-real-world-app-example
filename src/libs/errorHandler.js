@@ -4,7 +4,7 @@ const projectName = 'next_ssr_real_world_app'
 const cookiesUserToken = '_user_token'
 
 export const handleErrorInitialProps = (res, error) => {
-  console.log('[ERROR HANDLER]: ', error.message)
+  console.info('[FROM ERROR HANDLER]: ', error.message)
   console.error(error)
   const status = error.response && error.response.status
   if (status === 401) {

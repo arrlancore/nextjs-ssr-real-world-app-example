@@ -135,7 +135,7 @@ export const callApi = async requestConfigInit => {
     pathOption
   }
   const response = await axios.request(requestConfig)
-  console.log('Response from callApi')
+  console.info('Response from callApi')
   response.status === 401 && process.browser && Router.push('/login')
   result = { data: response.data }
   return result

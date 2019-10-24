@@ -12,8 +12,4 @@ const SignUpPage = () => {
   )
 }
 
-SignUpPage.getInitialProps = () => {
-  console.log('INIT RUN BEFORE LOAD')
-}
-
 export default SignUpPage
