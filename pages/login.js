@@ -12,9 +12,4 @@ const LoginPage = () => {
   )
 }
 
-LoginPage.getInitialProps = ({ reactContext }) => {
-  console.log('TCL: LoginPage.getInitialProps -> reactContext', reactContext)
-  console.log('INIT RUN BEFORE LOAD')
-}
-
 export default LoginPage

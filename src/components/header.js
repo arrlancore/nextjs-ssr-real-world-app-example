@@ -9,7 +9,7 @@ const Header = ({ router }) => {
   const [authData, setAuth] = useAuth()
   const userIsLogin = authData ? authData.isLogin : false
   const activePath = (router && router.asPath) || '/'
-  const { username } = authData || {}
+  const { username } = router.query || {}
 
   const logout = () => {
     setAuth({})

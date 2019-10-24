@@ -1,12 +1,3 @@
-/**
- * @todo
- * - load data profile x
- * - follow / unfollow
- * - show my article
- * - show my favorited article
- * - create component list article
- */
-
 import React from 'react'
 import Profile from '../src/components/profile'
 import { useApi, callApi } from '../src/libs/api'
