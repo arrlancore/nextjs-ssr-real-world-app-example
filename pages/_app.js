@@ -14,16 +14,16 @@ class MainApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const cookies = ctx && ctx.req ? ctx.req.headers.cookie : ''
     const isServer = !process.browser
-    const componentInitProps = await Component.getInitialProps({ ...ctx, isServer })
+    const componentInitProps = Component.getInitialProps ? await Component.getInitialProps({ ...ctx, isServer }) : {}
     return {
       cookies,
-      pageProps: Component.getInitialProps ? componentInitProps : {}
+      pageProps: componentInitProps
     }
   }
 
   render() {
     const { Component, pageProps, cookies, router } = this.props
-    const defaultTitle = 'Next SSR - Real World App'
+    const defaultTitle = 'Next SSR - Real World App Example'
     return (
       <ThemeProvider theme={theme}>
         <Head>
