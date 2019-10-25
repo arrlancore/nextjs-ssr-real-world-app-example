@@ -10,17 +10,18 @@ import SeoConfig from '../src/components/seoConfig'
 const UserProfilePage = props => {
   const { username } = props.router.query
   const requestConfig = props.initData.data ? null : { path: `/profiles/${username}`, secure: 'optional' }
-  const [userProfileData, requestUser] = useApi(requestConfig, props.initData)
+  const [singleProfile, requestSingleProfile] = useApi(requestConfig, props.initData)
+  const image = singleProfile.data && singleProfile.data.profile.image
   const prevUsername = usePrevious(username)
   React.useEffect(() => {
     if (!props.initData.isServer && username && prevUsername !== username) {
-      requestUser({ path: `/profiles/${username}`, secure: true })
+      requestSingleProfile({ path: `/profiles/${username}`, secure: true })
     }
-  }, [prevUsername, props.initData.isServer, requestUser, username])
+  }, [prevUsername, props.initData.isServer, requestSingleProfile, username])
   return (
     <Layout>
-      <SeoConfig title={`${username} profile's`} />
-      <Profile username={username} userApi={[userProfileData, requestUser]} />
+      <SeoConfig title={`${username} profile's`} image={image} />
+      <Profile username={username} userApi={[singleProfile, requestSingleProfile]} />
     </Layout>
   )
 }
