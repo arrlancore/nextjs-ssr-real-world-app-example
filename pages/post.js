@@ -15,9 +15,10 @@ const ViewPostPage = ({ initData, router }) => {
   const apiArticle = useApi(initData && initData.data ? null : requestConfig, initData)
   const [articleResult] = apiArticle
   const article = articleResult.data ? articleResult.data.article : {}
+  const title = article.title || ''
   return (
     <Layout>
-      <SeoConfig title={article.title || ''} description={article.description} />
+      <SeoConfig title={title} description={article.description} />
       <ViewPost apiArticle={apiArticle} />
     </Layout>
   )
