@@ -1,46 +1,71 @@
-# Custom Express Server example
+# ![Next.Js (React Universal) Real World Example App](public/project-name.jpg)
 
-## How to use
+[![RealWorld Frontend](https://img.shields.io/badge/realworld-frontend-%23783578.svg)](http://realworld.io)
 
-### Using `create-next-app`
+> ### Next.Js Server Side Rendering codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
 
-Execute [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app) with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) or [npx](https://github.com/zkat/npx#readme) to bootstrap the example:
 
-```bash
-npx create-next-app --example custom-server-express custom-server-express-app
-# or
-yarn create next-app --example custom-server-express custom-server-express-app
-```
+### [Demo](https://next-ssr-real-world-app.now.sh/)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
-### Download manually
+This codebase was created to demonstrate a fully fledged fullstack application built with **[NEXT.JS]** including CRUD operations, authentication, routing, pagination, and more.
 
-Download the example:
+We've gone to great lengths to adhere to the **[NEXT.JS+React]** community styleguides & best practices.
 
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/custom-server-express
-cd custom-server-express
-```
+For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
-Install it and run:
+## Getting started
 
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
-```
+You can view a live demo over at https://next-ssr-real-world-app.now.sh/
 
-Deploy it to the cloud with [now](https://zeit.co/now) ([download](https://zeit.co/download))
+To get the app running locally:
 
-```bash
-now
-```
+- Clone this repo
+- `npm install` to install all req'd dependencies
+- `npm start` to start the local server (this project uses create-react-app)
 
-## The idea behind the example
 
-Most of the times the default Next server will be enough but sometimes you want to run your own server to customize routes or other kind of the app behavior. Next provides a [Custom server and routing](https://github.com/zeit/next.js#custom-server-and-routing) so you can customize as much as you want.
+### Making requests to the backend API
 
-Because the Next.js server is just a node.js module you can combine it with any other part of the node.js ecosystem. in this case we are using express to build a custom router on top of Next.
+For convenience, we have a live API server running at https://conduit.productionready.io/api for the application to make requests against. You can view [the API spec here](https://github.com/GoThinkster/productionready/blob/master/api) which contains all routes & responses for the server.
 
-The example shows a server that serves the component living in `pages/a.js` when the route `/b` is requested and `pages/b.js` when the route `/a` is accessed. This is obviously a non-standard routing strategy. You can see how this custom routing is being made inside `server.js`.
+The source code for the backend server (available for Node, Rails and Django) can be found in the [main RealWorld repo](https://github.com/gothinkster/realworld).
+
+If you want to change the API URL to a local server, simply edit `src/config.js` and change `mainApiEndpoint` to the local server's URL (i.e. `localhost:8000/api`)
+
+
+## Functionality overview
+
+The example application is a social blogging site (i.e. a Medium.com clone) called "Conduit". It uses a custom API for all requests, including authentication. You can view a live demo over at https://next-ssr-real-world-app.now.sh/
+
+**General functionality:**
+
+- Authenticate users via JWT (login/signup pages + logout)
+- CRU* users (sign up & settings page - no deleting required)
+- CRUD Articles
+- CR*D Comments on articles (no updating required)
+- GET and display paginated lists of articles
+- Favorite articles
+- Follow other users
+
+**The general page breakdown looks like this:**
+
+- Home page (URL: / )
+    - List of tags
+    - List of articles pulled from either Feed, Global, or by Tag
+    - Pagination for list of articles
+- Sign in/Sign up pages (URL: /login, /sign-up )
+    - Use JWT (store the token in localStorage)
+- Settings page (URL: /setting )
+- Editor page to create/edit articles (URL: /update-post, /update-post/edit/article-slug-here )
+- Article page (URL: /post/article-slug-here )
+    - Delete article button (only shown to article's author)
+    - Render markdown from server client side
+    - Comments section at bottom of page
+    - Delete comment button (only shown to comment's author)
+- Profile page (URL: /user-profile/username)
+    - Show basic user info
+    - List of articles populated from author's created articles or author's favorited articles
+
+<br />
+
+[![Brought to you by Thinkster](https://raw.githubusercontent.com/gothinkster/realworld/master/media/end.png)](https://thinkster.io)
