@@ -9,7 +9,7 @@
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **[NEXT.JS]** including CRUD operations, authentication, routing, pagination, and more.
 
-We've gone to great lengths to adhere to the **[NEXT.JS+React]** community styleguides & best practices.
+We've gone to great lengths to adhere to the **[NEXT.JS+REACT.JS]** community styleguides & best practices.
 
 For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
@@ -21,7 +21,7 @@ To get the app running locally:
 
 - Clone this repo
 - `npm install` to install all req'd dependencies
-- `npm start` to start the local server (this project uses create-react-app)
+- `npm start` to start the local server
 
 
 ### Making requests to the backend API
