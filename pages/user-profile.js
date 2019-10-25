@@ -19,7 +19,7 @@ const UserProfilePage = props => {
   }, [prevUsername, props.initData.isServer, requestUser, username])
   return (
     <Layout>
-      <SeoConfig title={`Profile: ${username}`} />
+      <SeoConfig title={`${username} profile's`} />
       <Profile username={username} userApi={[userProfileData, requestUser]} />
     </Layout>
   )

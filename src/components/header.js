@@ -1,16 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
 import { useAuth } from '../libs/context'
-import { handleLogout } from '../libs/userAuth'
+import { handleLogout, isMine } from '../libs/userAuth'
 import { withRouter } from 'next/router'
 import { object } from 'prop-types'
 
 const Header = ({ router }) => {
+  isMine()
   const [authData, setAuth] = useAuth()
   const userIsLogin = authData ? authData.isLogin : false
   const activePath = (router && router.asPath) || '/'
-  const username = router.query.username || authData.username
-
+  const username = authData.username
   const logout = () => {
     setAuth({})
     handleLogout()
