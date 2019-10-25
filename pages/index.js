@@ -1,18 +1,18 @@
 import React from 'react'
 import Layout from '../src/components/Layout'
-import HomepageContent from '../src/components/homepage'
-import { useApi, callApi } from '../src/libs/api'
+import HomepageContent from '../src/components/HomepageContent'
+import { useApi, serverApiRequest } from '../src/libs/api'
 import { getPage } from '../src/libs/page'
 import { object } from 'prop-types'
 import { getTokenFromCookie } from '../src/libs/userAuth'
 import { useAuth } from '../src/libs/context'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
-import SeoConfig from '../src/components/seoConfig'
-import ListArticle from '../src/components/listArticle'
-import Pagination from '../src/components/pagination'
+import SeoConfig from '../src/components/SeoConfig'
+import ListArticle from '../src/components/ListArticle'
+import Pagination from '../src/components/Pagination'
 import usePrevious from '../src/libs/usePrevious'
-import Sidebar from '../src/components/sidebarHomepage'
-import { TabHomePage } from '../src/components/tabs'
+import Sidebar from '../src/components/SidebarHomepage'
+import { TabHomePage } from '../src/components/Tabs'
 
 const HomePage = ({ initData }) => {
   // prepare initial data & params
@@ -135,7 +135,7 @@ HomePage.getInitialProps = async ({ req, res, isServer }) => {
         params: getPage(),
         secure: 'optional'
       }
-      const response = await callApi({ ...requestListArticleParam, secure: token })
+      const response = await serverApiRequest({ ...requestListArticleParam, secure: token })
       const data = response.data
       const pages = { [requestListArticleParam.params.pageNumber]: data }
       initData = { data, requestConfig: requestListArticleParam, isServer, pages }

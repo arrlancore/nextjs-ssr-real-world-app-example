@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../src/components/Layout'
-import SeoConfig from '../src/components/seoConfig'
+import SeoConfig from '../src/components/SeoConfig'
 import Link from 'next/link'
 import usePrevious from '../src/libs/usePrevious'
 import { saveUser } from '../src/libs/userAuth'

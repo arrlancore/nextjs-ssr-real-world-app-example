@@ -1,12 +1,12 @@
 import React from 'react'
-import Profile from '../src/components/profile'
-import { useApi, callApi } from '../src/libs/api'
+import Profile from '../src/components/ProfileContent'
+import { useApi, serverApiRequest } from '../src/libs/api'
 import Layout from '../src/components/Layout'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
 import { object } from 'prop-types'
 import usePrevious from '../src/libs/usePrevious'
 import { getTokenFromCookie } from '../src/libs/userAuth'
-import SeoConfig from '../src/components/seoConfig'
+import SeoConfig from '../src/components/SeoConfig'
 const UserProfilePage = props => {
   const { username } = props.router.query
   const requestConfig = props.initData.data ? null : { path: `/profiles/${username}`, secure: 'optional' }
@@ -38,7 +38,7 @@ UserProfilePage.getInitialProps = async ({ req, res, isServer }) => {
         secure: token
       }
       let response = {}
-      response = await callApi({ ...requestConfigUser })
+      response = await serverApiRequest({ ...requestConfigUser })
       const data = response.data
       initData = { data, requestConfig: requestConfigUser, isServer }
     }

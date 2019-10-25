@@ -4,12 +4,12 @@ import React from 'react'
 import { object, string } from 'prop-types'
 
 const jwt = require('jsonwebtoken')
-// create auth content
+// create auth context
 export const AuthContext = createContext()
 // create provider for wrap component that will use context
 export const AuthProvider = ({ children, cookies }) => {
   const token = getTokenFromCookie(cookies)
-  const dataToken = token ? jwt.decode(token) : {}
+  const dataToken = token ? jwt.decode(token) : {} // extract data from token
   const [dataAuth, setDataAuth] = useState(getUser() || { token, isLogin: !!token, ...dataToken })
   return <AuthContext.Provider value={[dataAuth, setDataAuth]}>{children}</AuthContext.Provider>
 }

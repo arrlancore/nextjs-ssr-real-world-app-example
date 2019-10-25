@@ -3,6 +3,10 @@ import Router from 'next/router'
 const projectName = 'next_ssr_real_world_app'
 const cookiesUserToken = '_user_token'
 
+/**
+ * save user data to local storage and cookies
+ * @param {object} data
+ */
 export const saveUser = data => {
   localStorage.setItem(`${projectName}_user`, JSON.stringify(data))
   Cookies.set(cookiesUserToken, data.token)

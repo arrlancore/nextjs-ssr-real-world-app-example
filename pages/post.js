@@ -1,11 +1,11 @@
 import React from 'react'
-import ViewPost from '../src/components/view-post'
+import ViewPost from '../src/components/ViewPost'
 import Layout from '../src/components/Layout'
-import { useApi, callApi } from '../src/libs/api'
+import { useApi, serverApiRequest } from '../src/libs/api'
 import { object } from 'prop-types'
 import { getTokenFromCookie } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
-import SeoConfig from '../src/components/seoConfig'
+import SeoConfig from '../src/components/SeoConfig'
 
 const getQuery = (router, key) => router.query[key]
 
@@ -33,7 +33,7 @@ ViewPostPage.getInitialProps = async ({ query, isServer, req, res }) => {
       const slug = query.slug || req.params.slug
       const path = `/articles/${slug}`
       const requestConfig = { method: 'get', path, secure: token }
-      const response = await callApi(requestConfig)
+      const response = await serverApiRequest(requestConfig)
       const { data } = response
       initData = { data, isServer, requestConfig }
     }

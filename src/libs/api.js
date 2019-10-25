@@ -40,6 +40,11 @@ const dataFetchReducer = (state = {}, action) => {
   }
 }
 
+/**
+ * react hook that handle api request to the backend service and return response as state
+ * @param {object} initialRequestConfig
+ * @param {object} initialData
+ */
 export const useApi = (initialRequestConfig, initialData = {}) => {
   const initialRequest = initialRequestConfig || {}
   const [{ method, path, pathOption, params, data, secure }, setRequest] = useState(initialRequest)
@@ -113,8 +118,11 @@ export const useApi = (initialRequestConfig, initialData = {}) => {
   }, [path, method, params, data]) // eslint-disable-line
   return [state, setRequest]
 }
-
-export const callApi = async requestConfigInit => {
+/**
+ * a handler for request data to backend service on server side rendering
+ * @param {object} requestConfigInit
+ */
+export const serverApiRequest = async requestConfigInit => {
   const { method, path, pathOption, params, data, secure } = requestConfigInit
   let headers = {}
   if (secure && secure !== 'optional') {
@@ -135,7 +143,7 @@ export const callApi = async requestConfigInit => {
     pathOption
   }
   const response = await axios.request(requestConfig)
-  console.info('Response from callApi')
+  console.info('Response from serverApiRequest')
   response.status === 401 && process.browser && Router.push('/login')
   result = { data: response.data }
   return result
@@ -151,6 +159,7 @@ function errorHandler(error) {
         .join(typeObject > 1 ? ', ' : '')
     }
     return (
+      // TODO: check if this return ever reached then fix the replace with regEx
       error.data &&
       JSON.stringify(error.data.errors)
         .replace('{', '')

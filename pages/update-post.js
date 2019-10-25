@@ -2,9 +2,9 @@ import React from 'react'
 import Layout from '../src/components/Layout'
 import { getTokenFromCookie, protectPage } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
-import { callApi, useApi } from '../src/libs/api'
+import { serverApiRequest, useApi } from '../src/libs/api'
 import { object } from 'prop-types'
-import SeoConfig from '../src/components/seoConfig'
+import SeoConfig from '../src/components/SeoConfig'
 import usePrevious from '../src/libs/usePrevious'
 import Router from 'next/router'
 
@@ -135,7 +135,7 @@ UpdatePostPage.getInitialProps = async ({ req, res, isServer }) => {
       }
       let response = {}
       if (slug) {
-        response = await callApi({ ...requestConfigUser, secure: token })
+        response = await serverApiRequest({ ...requestConfigUser, secure: token })
         const data = response.data
         initData = { data, requestConfig: requestConfigUser, isServer }
       }
