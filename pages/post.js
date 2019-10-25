@@ -13,8 +13,8 @@ const ViewPostPage = ({ initData, router }) => {
   const slug = getQuery(router, 'slug')
   const requestConfig = { method: 'get', secure: 'optional', path: `/articles/${slug}` }
   const apiArticle = useApi(initData && initData.data ? null : requestConfig, initData)
-  const [articleResult] = apiArticle
-  const article = articleResult.data ? articleResult.data.article : {}
+  const [singleArticle] = apiArticle
+  const article = singleArticle.data ? singleArticle.data.article : {}
   const title = article.title || ''
   return (
     <Layout>

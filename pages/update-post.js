@@ -11,7 +11,7 @@ import Router from 'next/router'
 const UpdatePostPage = props => {
   const { slug } = props.router.query
   const requestConfig = !props.initData.data && slug ? { path: `/articles/${slug}`, secure: true } : null
-  const [dataArticle, requestPostArticle] = useApi(requestConfig, props.initData)
+  const [singleArticle, requestSingleArticle] = useApi(requestConfig, props.initData)
 
   const [values, setValues] = React.useState({
     title: '',
@@ -34,21 +34,21 @@ const UpdatePostPage = props => {
       data: { article: { ...values, tagList: values.tagList.split(',') } }
     }
     setIsSubmit(true)
-    requestPostArticle(requestConfig)
+    requestSingleArticle(requestConfig)
   }
 
-  const prevDataArticle = usePrevious(dataArticle)
-  const prevArticle = usePrevious(dataArticle.data)
+  const prevSingleArticle = usePrevious(singleArticle)
+  const prevArticleData = usePrevious(singleArticle.data)
   React.useEffect(() => {
-    if (isSubmit && dataArticle.data && dataArticle !== prevDataArticle) {
+    if (isSubmit && singleArticle.data && singleArticle !== prevSingleArticle) {
       setIsSubmit(false)
       // submit success
-      Router.push(`/post?slug=${dataArticle.data.article.slug}`, `/post/${dataArticle.data.article.slug}`)
+      Router.push(`/post?slug=${singleArticle.data.article.slug}`, `/post/${singleArticle.data.article.slug}`)
     }
-    if (dataArticle.data && dataArticle.data !== prevArticle) {
-      setValues({ ...dataArticle.data.article, edit: true, tagList: dataArticle.data.article.tagList.join(',') })
+    if (singleArticle.data && singleArticle.data !== prevArticleData) {
+      setValues({ ...singleArticle.data.article, edit: true, tagList: singleArticle.data.article.tagList.join(',') })
     }
-  }, [isSubmit, dataArticle, prevDataArticle, prevArticle])
+  }, [isSubmit, singleArticle, prevSingleArticle, prevArticleData])
 
   return (
     <Layout protected>
@@ -68,7 +68,7 @@ const UpdatePostPage = props => {
                       value={values.title}
                       className="form-control form-control-lg"
                       placeholder="Article Title"
-                      disabled={dataArticle.isLoading}
+                      disabled={singleArticle.isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -79,7 +79,7 @@ const UpdatePostPage = props => {
                       value={values.description}
                       className="form-control"
                       placeholder="What's this article about?"
-                      disabled={dataArticle.isLoading}
+                      disabled={singleArticle.isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -90,7 +90,7 @@ const UpdatePostPage = props => {
                       value={values.body}
                       rows="8"
                       placeholder="Write your article (in markdown)"
-                      disabled={dataArticle.isLoading}
+                      disabled={singleArticle.isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -100,12 +100,12 @@ const UpdatePostPage = props => {
                       className="form-control"
                       value={values.tagList}
                       placeholder="Enter tags"
-                      disabled={dataArticle.isLoading}
+                      disabled={singleArticle.isLoading}
                     />
                     <div className="tag-list" />
                   </fieldset>
                   <button
-                    disabled={dataArticle.isLoading}
+                    disabled={singleArticle.isLoading}
                     type="submit"
                     className="btn btn-lg pull-xs-right btn-primary"
                   >

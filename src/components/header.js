@@ -58,9 +58,9 @@ const Header = ({ router }) => {
   return (
     <nav className="navbar navbar-light">
       <div className="container">
-        <a className="navbar-brand" href="/">
-          conduit
-        </a>
+        <Link href="/">
+          <a className="navbar-brand">conduit</a>
+        </Link>
         <ul className="nav navbar-nav pull-xs-right">
           {menus.map(({ title, isLogin, ...rest }, idx) => (
             <React.Fragment key={idx}>

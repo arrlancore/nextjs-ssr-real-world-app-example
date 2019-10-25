@@ -6,6 +6,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import { AuthProvider } from '../src/libs/context'
 import { theme } from '../src/config'
+import NextNprogress from 'nextjs-progressbar'
 
 const NormalizeStyle = createGlobalStyle`
   ${styledNormalize}
@@ -40,6 +41,7 @@ class MainApp extends App {
           <link rel="stylesheet" href="/rt.min.css" />
           <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         </Head>
+        <NextNprogress color="#5cb85c" options={{ showSpinner: false }} />
         <NormalizeStyle />
         <AuthProvider cookies={cookies}>
           <Component router={router} {...pageProps} />
