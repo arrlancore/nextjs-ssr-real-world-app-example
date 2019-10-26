@@ -27,16 +27,14 @@ const ViewPostPage = ({ initData, router }) => {
 ViewPostPage.getInitialProps = async ({ query, isServer, req, res }) => {
   let initData = {}
   try {
-    if (isServer) {
-      const cookies = (req && req.headers && req.headers.cookie) || ''
-      const token = getTokenFromCookie(cookies)
-      const slug = query.slug || req.params.slug
-      const path = `/articles/${slug}`
-      const requestConfig = { method: 'get', path, secure: token }
-      const response = await serverApiRequest(requestConfig)
-      const { data } = response
-      initData = { data, isServer, requestConfig }
-    }
+    const cookies = (isServer && req && req.headers && req.headers.cookie) || ''
+    const token = getTokenFromCookie(cookies)
+    const slug = query.slug || req.params.slug
+    const path = `/articles/${slug}`
+    const requestConfig = { method: 'get', path, secure: token || 'optional' }
+    const response = await serverApiRequest(requestConfig)
+    const { data } = response
+    initData = { data, isServer, requestConfig }
     return { initData }
   } catch (error) {
     return handleErrorInitialProps(res, error)
