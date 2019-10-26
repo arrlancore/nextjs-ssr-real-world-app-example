@@ -6,7 +6,8 @@ import { handleErrorInitialProps } from '../src/libs/errorHandler'
 import { object } from 'prop-types'
 import usePrevious from '../src/libs/usePrevious'
 import { getTokenFromCookie } from '../src/libs/userAuth'
-import SeoConfig from '../src/components/SeoConfig'
+import SeoConfig from '../src/components/seoConfig'
+
 const UserProfilePage = props => {
   const { username } = props.router.query
   const requestConfig = props.initData.data ? null : { path: `/profiles/${username}`, secure: 'optional' }

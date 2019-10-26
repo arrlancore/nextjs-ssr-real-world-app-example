@@ -5,7 +5,7 @@ import { useApi, serverApiRequest } from '../src/libs/api'
 import { object } from 'prop-types'
 import { getTokenFromCookie } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
-import SeoConfig from '../src/components/SeoConfig'
+import SeoConfig from '../src/components/seoConfig'
 
 const getQuery = (router, key) => router.query[key]
 

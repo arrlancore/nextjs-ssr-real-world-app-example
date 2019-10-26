@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../src/components/Layout'
-import SeoConfig from '../src/components/SeoConfig'
+import SeoConfig from '../src/components/seoConfigs'
 import { useApi } from '../src/libs/api'
 import { useAuth } from '../src/libs/context'
 import usePrevious from '../src/libs/usePrevious'
