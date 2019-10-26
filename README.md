@@ -1,11 +1,11 @@
-# ![Next.Js (React Universal) Real World Example App](public/project-name.jpg)
+# ![Next.Js (React Universal) Real World Example App](project-name.jpg)
 
 [![RealWorld Frontend](https://img.shields.io/badge/realworld-frontend-%23783578.svg)](http://realworld.io)
 
 > ### Next.Js Server Side Rendering codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
 
 
-### [Demo](https://next-ssr-real-world-app.now.sh/)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
+### [Demo](https://nextjs-ssr-real-world-example.herokuapp.com/)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **[NEXT.JS]** including CRUD operations, authentication, routing, pagination, and more.
 
@@ -15,7 +15,7 @@ For more information on how to this works with other frontends/backends, head ov
 
 ## Getting started
 
-You can view a live demo over at https://next-ssr-real-world-app.now.sh/
+You can view a live demo over at https://nextjs-ssr-real-world-example.herokuapp.com/
 
 To get the app running locally:
 
