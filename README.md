@@ -21,6 +21,7 @@ To get the app running locally:
 
 - Clone this repo
 - `npm install` to install all req'd dependencies
+- `npm run build` to build the app
 - `npm start` to start the local server
 
 
