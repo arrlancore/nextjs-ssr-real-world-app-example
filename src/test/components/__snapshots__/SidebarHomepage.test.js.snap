@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SidebarHomepage /> component renders all tags 1`] = `
+<DocumentFragment>
+  <div
+    class="sidebar"
+  >
+    <h2>
+      Popular Tags
+    </h2>
+    <div
+      class="tag-list"
+    >
+      <span
+        class="tag-pill tag-default"
+        style="cursor: pointer;"
+      >
+        butt
+      </span>
+      <span
+        class="tag-pill tag-default"
+        style="cursor: pointer;"
+      >
+        test
+      </span>
+      <span
+        class="tag-pill tag-default"
+        style="cursor: pointer;"
+      >
+        dragons
+      </span>
+      <span
+        class="tag-pill tag-default"
+        style="cursor: pointer;"
+      >
+        training
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
