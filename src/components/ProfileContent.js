@@ -4,9 +4,9 @@ import Router from 'next/router'
 import { useApi } from '../libs/api'
 import { getPage } from '../libs/page'
 import { string, func, array } from 'prop-types'
-import ListArticle from './ListArticle'
+import ListArticle from './listArticle'
 import usePrevious from '../libs/usePrevious'
-import Pagination from './Pagination'
+import Pagination from './pagination'
 
 export const TabContent = ({ activeTab, onTabClick }) => {
   const TAB_NAMES = { MY_ARTICLE: 'My Articles', FAVORITES_ARTICLE: 'Favorite Articles' }

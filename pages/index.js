@@ -7,12 +7,12 @@ import { object } from 'prop-types'
 import { getTokenFromCookie } from '../src/libs/userAuth'
 import { useAuth } from '../src/libs/context'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
-import SeoConfig from '../src/components/SeoConfig'
-import ListArticle from '../src/components/ListArticle'
-import Pagination from '../src/components/Pagination'
+import SeoConfig from '../src/components/seoConfig'
+import ListArticle from '../src/components/listArticle'
+import Pagination from '../src/components/pagination'
 import usePrevious from '../src/libs/usePrevious'
-import Sidebar from '../src/components/SidebarHomepage'
-import { TabHomePage } from '../src/components/Tabs'
+import Sidebar from '../src/components/sidebarHomepage'
+import { TabHomePage } from '../src/components/tabs'
 
 const HomePage = ({ initData }) => {
   // prepare initial data & params

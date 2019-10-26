@@ -4,7 +4,7 @@ import { getTokenFromCookie, protectPage } from '../src/libs/userAuth'
 import { handleErrorInitialProps } from '../src/libs/errorHandler'
 import { serverApiRequest, useApi } from '../src/libs/api'
 import { object } from 'prop-types'
-import SeoConfig from '../src/components/SeoConfig'
+import SeoConfig from '../src/components/seoConfig'
 import usePrevious from '../src/libs/usePrevious'
 import Router from 'next/router'
 
