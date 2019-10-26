@@ -4,7 +4,7 @@ import { func, array } from 'prop-types'
 export function Sidebar({ onTagClick, listTag }) {
   return (
     <div className="sidebar">
-      <p>Popular Tags</p>
+      <h2>Popular Tags</h2>
 
       <div className="tag-list">
         {listTag.map((tag, idx) => (
