@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> component renders with brand name and license description should not be blank 1`] = `
+<DocumentFragment>
+  <footer>
+    <div
+      class="container"
+    >
+      <a
+        class="logo-font"
+        href="/"
+      >
+        conduit
+      </a>
+      <span
+        class="attribution"
+      >
+        An interactive learning project from 
+        <a
+          href="https://thinkster.io"
+        >
+          Thinkster
+        </a>
+        . Code & design licensed under MIT.
+      </span>
+    </div>
+  </footer>
+</DocumentFragment>
+`;

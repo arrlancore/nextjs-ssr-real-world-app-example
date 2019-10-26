@@ -4,6 +4,13 @@ import React from 'react'
 import Link from 'next/link'
 
 describe('<Footer /> component', () => {
+  it('renders with brand name and license description should not be blank', () => {
+    const wrapper = render(<Footer />)
+    expect(wrapper.getByText('conduit')).toBeDefined()
+    expect(wrapper.container.getElementsByClassName('.attribution')).not.toBe('')
+    expect(wrapper.asFragment()).toMatchSnapshot()
+  })
+
   it('Render footer should anchor point to root ', () => {
     const { getByText } = render(<Footer />)
 
