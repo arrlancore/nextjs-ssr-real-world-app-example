@@ -39,6 +39,7 @@ class MainApp extends App {
           />
           <link rel="stylesheet" href="/main.css" />
           <link rel="stylesheet" href="/rt.min.css" />
+          <link rel="stylesheet" href="/editor.css" />
           <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         </Head>
         <NextNprogress color="#5cb85c" options={{ showSpinner: false }} />
