@@ -19,6 +19,7 @@
       "version": "detect"
     }
   },
+  "parser": "babel-eslint",
   "rules": {
     "linebreak-style": ["error", "unix"],
     "global-require": 0,

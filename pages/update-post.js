@@ -7,6 +7,7 @@ import { object } from 'prop-types'
 import SeoConfig from '../src/components/seoConfig'
 import usePrevious from '../src/libs/usePrevious'
 import Router from 'next/router'
+import TextEditor from '../src/components/TextEditor'
 
 const UpdatePostPage = props => {
   const { slug } = props.router.query
@@ -83,14 +84,10 @@ const UpdatePostPage = props => {
                     />
                   </fieldset>
                   <fieldset className="form-group">
-                    <textarea
-                      onChange={({ target }) => handleChangeValue('body')(target)}
-                      required
-                      className="form-control"
-                      value={values.body}
-                      rows="8"
-                      placeholder="Write your article (in markdown)"
-                      disabled={singleArticle.isLoading}
+                    <TextEditor
+                      placeholder="Write your article here"
+                      markdown={md => handleChangeValue('body')({ value: md })}
+                      initValue={values.body}
                     />
                   </fieldset>
                   <fieldset className="form-group">
