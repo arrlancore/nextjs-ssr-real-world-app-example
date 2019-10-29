@@ -11,6 +11,22 @@ import NextNprogress from 'nextjs-progressbar'
 const NormalizeStyle = createGlobalStyle`
   ${styledNormalize}
 `
+const registrationSw = () => {
+  // ServiceWorker is a progressive technology. Ignore unsupported browsers
+  if ('serviceWorker' in navigator) {
+    console.log('CLIENT: service worker registration in progress.')
+    navigator.serviceWorker.register('service-worker.js').then(
+      function() {
+        console.log('CLIENT: service worker registration complete.')
+      },
+      function() {
+        console.log('CLIENT: service worker registration failure.')
+      }
+    )
+  } else {
+    console.log('CLIENT: service worker is not supported.')
+  }
+}
 class MainApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const cookies = ctx && ctx.req ? ctx.req.headers.cookie : ''
@@ -20,6 +36,9 @@ class MainApp extends App {
       cookies,
       pageProps: componentInitProps
     }
+  }
+  componentDidMount() {
+    registrationSw()
   }
 
   render() {
@@ -40,6 +59,7 @@ class MainApp extends App {
           <link rel="stylesheet" href="/main.css" />
           <link rel="stylesheet" href="/rt.min.css" />
           <link rel="stylesheet" href="/editor.css" />
+          <link rel="manifest" href="/manifest.json" />
           <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         </Head>
         <NextNprogress color="#5cb85c" options={{ showSpinner: false }} />

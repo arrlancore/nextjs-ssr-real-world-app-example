@@ -1,7 +1,7 @@
 const { ANALYZE, ASSET_HOST } = process.env
 const assetPrefix = ASSET_HOST || ''
 
-module.exports = {
+const configs = {
   assetPrefix,
   webpack: config => {
     config.output.publicPath = `${assetPrefix}${config.output.publicPath}`
@@ -19,3 +19,5 @@ module.exports = {
     return config
   }
 }
+
+module.exports = configs

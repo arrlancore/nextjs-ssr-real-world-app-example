@@ -26,7 +26,6 @@ app.prepare().then(() => {
   )
 
   sitemap(server)
-
   // custom route pages
   server.get('/post/:slug', (req, res) => {
     return app.render(req, res, '/post', { slug: req.params.slug })
