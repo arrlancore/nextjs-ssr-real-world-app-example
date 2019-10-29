@@ -3,6 +3,7 @@ const next = require('next')
 const helmet = require('helmet')
 const express = require('express')
 const compression = require('compression')
+const sitemap = require('./sitemap')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -12,7 +13,6 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
   const server = express()
-
   server.use(helmet())
   server.use(compression())
 
@@ -25,6 +25,7 @@ app.prepare().then(() => {
     })
   )
 
+  sitemap(server)
   // custom route pages
   server.get('/post/:slug', (req, res) => {
     return app.render(req, res, '/post', { slug: req.params.slug })

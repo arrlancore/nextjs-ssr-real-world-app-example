@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /update-post
+Disallow: /setting
+
+Sitemap: https://nextjs-ssr-real-world-example.herokuapp.com/sitemap.xml
+Sitemap: https://nextjs-ssr-real-world-example.herokuapp.com/post-sitemap.xml
+Host: https://nextjs-ssr-real-world-example.herokuapp.com
