@@ -11,6 +11,7 @@ import NextNprogress from 'nextjs-progressbar'
 const NormalizeStyle = createGlobalStyle`
   ${styledNormalize}
 `
+const dev = process.env.NODE_ENV !== 'production'
 const registrationSw = () => {
   // ServiceWorker is a progressive technology. Ignore unsupported browsers
   if ('serviceWorker' in navigator) {
@@ -38,7 +39,7 @@ class MainApp extends App {
     }
   }
   componentDidMount() {
-    registrationSw()
+    !dev && registrationSw()
   }
 
   render() {
