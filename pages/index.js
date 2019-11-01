@@ -102,7 +102,10 @@ const HomePage = ({ initData }) => {
   return (
     <Layout>
       <SeoConfig title="Wellcome to the real world app example" />
-      <HomepageContent banner={banner} sidebar={<Sidebar listTag={tags} onTagClick={handleFilterByTag} />}>
+      <HomepageContent
+        banner={banner}
+        sidebar={<Sidebar listTag={tags} tagLoading={listTag.isLoading} onTagClick={handleFilterByTag} />}
+      >
         <TabHomePage global={isGlobal} onTabClick={handleChangeTab} login={isLogin} />
         <ListArticle
           onRequestReload={handleReloadArticles}
