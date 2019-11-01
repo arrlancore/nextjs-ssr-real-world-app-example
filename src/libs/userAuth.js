@@ -39,7 +39,7 @@ export const getTokenFromCookie = cookies => {
   let token = null
   if (typeof cookies === 'string' && cookies.length > 1) {
     const datatoken = cookies.split(';').filter(data => data.search('user_token') !== -1) || ['']
-    const tokens = datatoken[0].split('=')
+    const tokens = datatoken[0] ? datatoken[0].split('=') : datatoken
     token = tokens.length === 2 && tokens[1]
   }
   return token
