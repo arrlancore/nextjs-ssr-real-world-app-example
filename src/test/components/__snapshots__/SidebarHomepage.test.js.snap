@@ -5,9 +5,9 @@ exports[`<SidebarHomepage /> component renders all tags 1`] = `
   <div
     class="sidebar"
   >
-    <h2>
+    <h3>
       Popular Tags
-    </h2>
+    </h3>
     <div
       class="tag-list"
     >
