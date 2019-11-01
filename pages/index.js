@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../src/components/Layout'
 import HomepageContent from '../src/components/HomepageContent'
+import Router, { useRouter } from 'next/router'
 import { useApi, serverApiRequest } from '../src/libs/api'
 import { getPage } from '../src/libs/page'
 import { object } from 'prop-types'
@@ -16,6 +17,7 @@ import { TabHomePage } from '../src/components/tabs'
 
 const HomePage = ({ initData }) => {
   // prepare initial data & params
+  const router = useRouter()
   const [auth] = useAuth()
   const isLogin = auth && auth.isLogin
   const pathArticleOption = { feed: '/articles/feed', global: '/articles' }
@@ -45,6 +47,13 @@ const HomePage = ({ initData }) => {
   // ***create some handler***
   // handle the pagination, show data by page number
   const handleChangePage = newPageNumber => {
+    Router.push({
+      pathname: '/',
+      query: {
+        ...router.query,
+        page: newPageNumber
+      }
+    })
     if (listArticle.pages[newPageNumber]) {
       const newParams = { ...pageActiveData.params, pageNumber: newPageNumber }
       return setPageActiveData({ ...listArticle.pages[newPageNumber], params: newParams })
@@ -62,6 +71,12 @@ const HomePage = ({ initData }) => {
       currentParams.reset = true
     }
     const newParams = { ...currentParams, ...getPage(), tag: tagName }
+    Router.push({
+      pathname: '/',
+      query: {
+        tag: tagName
+      }
+    })
     requestListArticle({ ...listArticle.requestConfig, params: newParams, path: global })
     !isGlobal && setIsGlobal(true)
   }
@@ -129,13 +144,21 @@ HomePage.getInitialProps = async ({ req, res, isServer }) => {
   try {
     if (isServer) {
       const cookies = (req && req.headers && req.headers.cookie) || ''
+      const query = {
+        page: req.query.page || 1,
+        tag: req.query.tag
+      }
+
       const token = getTokenFromCookie(cookies)
       const isLogin = !!token
       const pathOption = { feed: '/articles/feed', global: '/articles' }
       const requestListArticleParam = {
         path: isLogin ? pathOption.feed : pathOption.global,
         pathOption,
-        params: getPage(),
+        params: {
+          ...getPage(+query.page),
+          ...(query.tag && { tag: query.tag })
+        },
         secure: 'optional'
       }
       const response = await serverApiRequest({ ...requestListArticleParam, secure: token })
