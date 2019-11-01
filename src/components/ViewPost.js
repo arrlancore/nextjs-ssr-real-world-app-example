@@ -7,6 +7,7 @@ import { isMine } from '../libs/userAuth'
 import usePrev from '../libs/usePrevious'
 import Router from 'next/router'
 import { toast } from 'react-toastify'
+import { SinglePostLoading } from './Skeletons'
 
 const ViewArticle = ({ apiArticle }) => {
   const [dataArticle, requestDataArticle] = apiArticle
@@ -178,8 +179,11 @@ const ViewArticle = ({ apiArticle }) => {
       <div className="container page">
         <div className="row article-content">
           <div className="col-md-12">
-            <div />
-            <div dangerouslySetInnerHTML={{ __html: marked(body || '') }} />
+            {dataArticle.isLoading ? (
+              <SinglePostLoading />
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: marked(body || '') }} />
+            )}
           </div>
         </div>
 
