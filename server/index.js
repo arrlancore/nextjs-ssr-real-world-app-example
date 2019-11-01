@@ -4,7 +4,6 @@ const helmet = require('helmet')
 const express = require('express')
 const compression = require('compression')
 const sitemap = require('./sitemap')
-const cookieParser = require('cookie-parser')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -16,9 +15,6 @@ app.prepare().then(() => {
   const server = express()
   server.use(helmet())
   server.use(compression())
-  server.use(cookieParser())
-  server.use(express.urlencoded())
-  server.use(express.json())
 
   const staticPath = path.join(__dirname, '../public')
   server.use(

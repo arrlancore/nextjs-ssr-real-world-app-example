@@ -43,12 +43,10 @@ const HomePage = ({ initData }) => {
     params: listArticle.requestConfig.params
   })
   const [isGlobal, setIsGlobal] = React.useState(!isLogin)
-  const [page, setPage] = React.useState(router.query.page || 1)
 
   // ***create some handler***
   // handle the pagination, show data by page number
   const handleChangePage = newPageNumber => {
-    debugger
     Router.push({
       pathname: '/',
       query: {
@@ -58,7 +56,6 @@ const HomePage = ({ initData }) => {
     })
     if (listArticle.pages[newPageNumber]) {
       const newParams = { ...pageActiveData.params, pageNumber: newPageNumber }
-      setPage(newPageNumber)
       return setPageActiveData({ ...listArticle.pages[newPageNumber], params: newParams })
     }
     const newRequestParams = getPage(newPageNumber)
@@ -74,7 +71,6 @@ const HomePage = ({ initData }) => {
       currentParams.reset = true
     }
     const newParams = { ...currentParams, ...getPage(), tag: tagName }
-    debugger
     Router.push({
       pathname: '/',
       query: {
