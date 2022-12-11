@@ -15,7 +15,7 @@
     "draft-js-plugins-editor": "^3.0.0",
     "draft-js-static-toolbar-plugin": "^3.0.1",
     "draftjs-md-converter": "^1.2.0",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "helmet": "^3.20.0",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
